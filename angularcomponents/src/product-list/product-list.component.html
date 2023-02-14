@@ -1,0 +1,10 @@
+<ul *ngFor="let product of GetProducts()">
+  <li>{{product.Name}} | {{product.Price}} | {{product.Quantity}}</li>
+</ul>
+
+<div>
+  <input type="text" placeholder="Name..." [(ngModel)]="CurrentName">
+  <input type="text" placeholder="Price..." [(ngModel)]="CurrentPrice">
+  <input type="text" placeholder="Quantity..." [(ngModel)]="CurrentQuantity">
+  <input type="button" value="Add product" (click)="AddProduct()">
+</div>
