@@ -1,0 +1,33 @@
+<h1>{{title}}</h1>
+
+<input #login placeholder="Enter login..."/>
+<input #password type="password" placeholder="Enter password..."/>
+<button (click)="Login(login.value, password.value)">Login</button>
+<app-data [myData]="title"></app-data>
+
+<div>
+  <input #buttonElement type="button" value="Check" (click)="ToggleShow()"/>
+
+  <div *ngIf="isShown then block1 else block2">My content</div>
+
+  <ng-template #block1>
+    <div style="color: navy;">Inside template (navy)</div>
+  </ng-template>
+
+  <ng-template #block2>
+    <div style="color: red;">Inside template (red)</div>
+  </ng-template>
+
+  <div>
+    <div [style.color]="trafficLightColor">COLOR</div>
+    <input type="button" (click)="ChangeLight()" value="Change color">
+  </div>
+
+  <div [ngSwitch]="blockName">
+    <div *ngSwitchCase="'blockA'">A</div>
+    <div *ngSwitchCase="'blockB'">B</div>
+    <div *ngSwitchCase="'blockC'">C</div>
+    <div *ngSwitchDefault>DefaultBlock</div>
+  </div>
+
+</div>
