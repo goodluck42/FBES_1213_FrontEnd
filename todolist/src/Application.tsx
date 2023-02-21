@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {MouseEvent, ChangeEvent} from 'react';
 import './Application.css';
+import TodoList from "./TodoList";
 
 type ApplicationProp = {
-    baseInputPlaceholder: string,
-    secondAttr: string
+    baseInputPlaceholder: string
 };
 
-type ApplicationState =
-{
-    inputValue: string
+type ApplicationState = {
+    newTaskName: string,
+    tasks: string[]
 };
 
 class Application extends React.Component<ApplicationProp, ApplicationState> {
@@ -16,24 +16,29 @@ class Application extends React.Component<ApplicationProp, ApplicationState> {
         super(props);
 
         this.state = {
-          inputValue: ""
+            newTaskName: "",
+            tasks: []
         };
 
-        this.changeValue = this.changeValue.bind(this);
+        this.addTask = this.addTask.bind(this);
+        this.onInputChanged = this.onInputChanged.bind(this);
     }
 
-    changeValue(): void
-    {
-        this.setState({ inputValue: "Hello React" });
+    addTask(e: MouseEvent<HTMLInputElement>): void {
+        this.state.tasks.push(this.state.newTaskName);
+        this.forceUpdate();
+    }
 
-        console.log("Changed");
+    onInputChanged(e: ChangeEvent<HTMLInputElement>): void {
+        this.setState({newTaskName: e.target.value});
     }
 
     render() {
         return (
             <>
-                <input type="text" value={this.state.inputValue} placeholder={this.props.baseInputPlaceholder}/>
-                <input type="button" value="Change value" onClick={this.changeValue}/>
+                <input type="text" placeholder={this.props.baseInputPlaceholder} onChange={this.onInputChanged}/>
+                <input type="button" value="Add task" onClick={this.addTask}/>
+                <TodoList tasks={this.state.tasks}/>
             </>
         );
     }

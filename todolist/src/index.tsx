@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Application baseInputPlaceholder="Write some text..." secondAttr="123" />
+    <Application baseInputPlaceholder="Write some text..." />
   </React.StrictMode>
 );
 
