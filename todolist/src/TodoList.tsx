@@ -29,13 +29,21 @@ class TodoList extends Component<TodoListProp> {
 
             if (task.id === realId)
             {
-                this.props.tasks.splice(i, 1);
-
+                fetch(`https://localhost:7233/api/v1/todo/${id}`, {
+                    method: "DELETE"
+                }).then(() => {
+                    this.props.tasks.splice(i, 1);
+                    this.forceUpdate();
+                });
                 break;
             }
         }
 
-        this.forceUpdate();
+
+    }
+
+    componentDidMount() {
+
     }
 
     render() {

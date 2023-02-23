@@ -32,17 +32,28 @@ class Application extends React.Component<ApplicationProp, ApplicationState> {
     }
 
     addTask(e: MouseEvent<HTMLInputElement>): void {
-        this.state.tasks.push({
-            taskDescription: this.state.newTaskName,
-            id: this.state.tasksCounter
+        fetch("https://localhost:7233/api/v1/todo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                taskDescription: this.state.newTaskName
+            })
+        }).then(text => text.json()).then(task => {
+            this.state.tasks.push(task);
+            this.forceUpdate();
         });
-
-        this.setState({tasksCounter: this.state.tasksCounter + 1});
-        this.forceUpdate();
     }
 
     onInputChanged(e: ChangeEvent<HTMLInputElement>): void {
         this.setState({newTaskName: e.target.value});
+    }
+
+    componentDidMount() {
+        fetch("https://localhost:7233/api/v1/todo/all").then(text => text.json()).then(data => {
+           this.setState({tasks: data});
+        });
     }
 
     render() {
