@@ -6,9 +6,15 @@ type ApplicationProp = {
     baseInputPlaceholder: string
 };
 
+export type Task = {
+    taskDescription: string,
+    id: number
+};
+
 type ApplicationState = {
     newTaskName: string,
-    tasks: string[]
+    tasks: Task[],
+    tasksCounter: number
 };
 
 class Application extends React.Component<ApplicationProp, ApplicationState> {
@@ -17,7 +23,8 @@ class Application extends React.Component<ApplicationProp, ApplicationState> {
 
         this.state = {
             newTaskName: "",
-            tasks: []
+            tasks: [],
+            tasksCounter: 0
         };
 
         this.addTask = this.addTask.bind(this);
@@ -25,7 +32,12 @@ class Application extends React.Component<ApplicationProp, ApplicationState> {
     }
 
     addTask(e: MouseEvent<HTMLInputElement>): void {
-        this.state.tasks.push(this.state.newTaskName);
+        this.state.tasks.push({
+            taskDescription: this.state.newTaskName,
+            id: this.state.tasksCounter
+        });
+
+        this.setState({tasksCounter: this.state.tasksCounter + 1});
         this.forceUpdate();
     }
 

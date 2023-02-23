@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   private static Components: any = [Page1Component, Page2Component, Page3Component];
 
   constructor() {
-
+    
   }
 
   public ngOnInit(): void {
