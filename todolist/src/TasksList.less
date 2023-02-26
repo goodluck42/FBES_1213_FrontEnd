@@ -1,0 +1,31 @@
+.tasks-container {
+  list-style: none;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.task {
+  display: flex;
+  background-color: #2f3e3c;
+  flex-direction: row;
+  margin: 0.3rem;
+  padding: 0.2rem 1rem;
+  border-radius: 10px;
+
+  .desc {
+    width: 95%;
+  }
+
+  .deleteBtn {
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    font-size: 1.5rem;
+    transition: 1.5s;
+    color: #ea0303;
+    &:hover {
+      color: darkslategrey;
+    }
+
+  }
+}

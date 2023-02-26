@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Application from './Application';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,7 +11,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Application baseInputPlaceholder="Write some text..." />
+      <Application baseInputPlaceholder="Enter text..." />
   </React.StrictMode>
 );
 

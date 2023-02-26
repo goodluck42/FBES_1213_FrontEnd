@@ -1,10 +1,13 @@
-import React, {MouseEvent, ChangeEvent} from 'react';
+import React, {MouseEvent, ChangeEvent, PropsWithChildren} from 'react';
 import './Application.css';
 import TodoList from "./TodoList";
+import {BrowserRouter, Link, Outlet, Route, Routes} from "react-router-dom";
+import AddingTask from "./AddingTask";
+import TasksList from "./TasksList";
 
 type ApplicationProp = {
     baseInputPlaceholder: string
-};
+} & PropsWithChildren;
 
 export type Task = {
     taskDescription: string,
@@ -20,7 +23,6 @@ type ApplicationState = {
 class Application extends React.Component<ApplicationProp, ApplicationState> {
     constructor(props: ApplicationProp) {
         super(props);
-
         this.state = {
             newTaskName: "",
             tasks: [],
@@ -59,9 +61,28 @@ class Application extends React.Component<ApplicationProp, ApplicationState> {
     render() {
         return (
             <>
-                <input type="text" placeholder={this.props.baseInputPlaceholder} onChange={this.onInputChanged}/>
-                <input type="button" value="Add task" onClick={this.addTask}/>
-                <TodoList tasks={this.state.tasks}/>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/task/all" element={<TasksList/>}/>
+                        <Route path="/task/add" element={<AddingTask />}/>
+                        <Route path="/task/update" element={<></>}/>
+                        <Route path="*" element={<div>404 not found.</div>}/>
+                    </Routes>
+                </BrowserRouter>
+
+                <header>
+
+                </header>
+                <main>
+                    <Outlet />
+                </main>
+                <footer>
+                    This is my footer.
+                </footer>
+                {/*<input type="text" placeholder={this.props.baseInputPlaceholder} onChange={this.onInputChanged}/>*/}
+                {/*<input type="button" value="Add task" onClick={this.addTask}/>*/}
+                {/*<TodoList tasks={this.state.tasks} />*/}
+                {/*{this.props.children}*/}
             </>
         );
     }
